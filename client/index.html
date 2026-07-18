@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>语音 MiniMax</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app-container">
+        <!-- Header -->
+        <header id="toolbar">
+            <div class="toolbar-left">
+                <span class="app-title">语音 MiniMax</span>
+                <span id="connection-status" class="status-indicator disconnected" title="授权状态">●</span>
+            </div>
+            <div class="toolbar-center">
+                <button id="btn-play-all" title="播放全部" style="margin-right:10px;">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 10h12v2H4zm0-4h12v2H4zm0 8h8v2H4zm10 0v6l5-3z" />
+                    </svg>
+                </button>
+                <button id="btn-add-block" title="添加行">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="toolbar-right">
+                <button id="btn-load-project" title="加载项目">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
+                    </svg>
+                </button>
+                <button id="btn-clone" title="声音克隆">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+                    </svg>
+                </button>
+                <button id="btn-settings" title="设置">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.58 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <div id="workspace">
+            <!-- Left Panel: Audio Blocks List -->
+            <div id="left-panel">
+                <div id="audio-list-container">
+                    <!-- Audio Blocks will be injected here -->
+                </div>
+            </div>
+
+            <!-- Right Panel: Parameters -->
+            <div id="right-panel">
+                <div class="panel-header" style="display:none;"> 
+                    <span>语音引擎</span>
+                    <select id="engine-select" style="font-size: 12px; margin-left: auto;">
+                        <option value="minimax" selected>MiniMax API</option>
+                    </select>
+                </div>
+
+                <!-- MiniMax Controls -->
+                <div id="minimax-controls">
+                    <div class="control-group">
+                        <label>模型</label>
+                        <select id="model-select">
+                            <option value="speech-2.8-hd" selected>MiniMax Speech 2.8 HD</option>
+                            <option value="speech-2.8-turbo">MiniMax Speech 2.8 Turbo</option>
+                            <option value="speech-2.6-hd">MiniMax Speech 2.6 HD</option>
+                            <option value="speech-2.6-turbo">MiniMax Speech 2.6 Turbo</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>音色</label>
+                        <select id="voice-select">
+                            <optgroup label="克隆音色" id="cloned-voice-group"></optgroup>
+                            <optgroup label="粤语">
+                                <option value="Cantonese_ProfessionalHost（F)" selected>粤语-专业女主持</option>
+                                <option value="Cantonese_GentleLady">粤语-温柔女声</option>
+                                <option value="Cantonese_ProfessionalHost（M)">粤语-专业男主持</option>
+                                <option value="Cantonese_PlayfulMan">粤语-活泼男声</option>
+                                <option value="Cantonese_CuteGirl">粤语-可爱女孩</option>
+                                <option value="Cantonese_KindWoman">粤语-善良女声</option>
+                            </optgroup>
+                            <option value="male-qn-qingse">青涩青年音色</option>
+                            <option value="male-qn-jingying">精英青年音色</option>
+                            <option value="male-qn-badao">霸道青年音色</option>
+                            <option value="male-qn-daxuesheng">青年大学生音色</option>
+                            <option value="female-shaonv">少女音色</option>
+                            <option value="female-yujie">御姐音色</option>
+                            <option value="female-chengshu">成熟女性音色</option>
+                            <option value="female-tianmei">甜美女性音色</option>
+                            <option value="clever_boy">聪明男童</option>
+                            <option value="cute_boy">可爱男童</option>
+                            <option value="lovely_girl">萌萌女童</option>
+                            <option value="Chinese (Mandarin)_News_Anchor">新闻女声</option>
+                            <option value="Chinese (Mandarin)_Male_Announcer">播报男声</option>
+                            <option value="Chinese (Mandarin)_Mature_Woman">成熟女性</option>
+                            <option value="English_Trustworthy_Man">英文-稳重男声</option>
+                            <option value="English_Graceful_Lady">英文-优雅女声</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- T5 Controls (Hidden by default) -->
+                <div id="t5-controls" class="hidden">
+                    <div class="control-group">
+                        <label>参考音频（声音克隆）</label>
+                        <div style="display:flex; gap:5px;">
+                            <input type="text" id="t5-ref-path" placeholder="选择 WAV 文件..." readonly
+                                style="font-size:11px;">
+                            <button id="btn-browse-ref">...</button>
+                        </div>
+                        <div style="font-size: 10px; color: #888; margin-top: 4px;">
+                            * 建议使用 3-10 秒清晰语音。
+                            <br>* 首次运行将下载模型（约 5GB）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="slider-group">
+                    <label>语速 <span id="val-speed">1.0</span></label>
+                    <input type="range" id="slider-speed" min="0.5" max="2.0" step="0.1" value="1.0">
+                </div>
+
+                <div class="slider-group">
+                    <label>音高 <span id="val-temp">0.0</span></label>
+                    <input type="range" id="slider-temp" min="-1.0" max="1.0" step="0.1" value="0.0">
+                </div>
+
+                <div class="divider"></div>
+                <div class="control-group">
+                    <label>语气（风格）</label>
+                    <select id="input-tone" style="width:100%; box-sizing:border-box;">
+                        <option value="" selected>默认</option>
+                        <option value="兴奋">兴奋</option>
+                        <option value="开心">开心</option>
+                        <option value="温柔">温柔</option>
+                        <option value="悲伤">悲伤</option>
+                        <option value="愤怒">愤怒</option>
+                        <option value="低语">低语</option>
+                        <option value="正式">正式</option>
+                        <option value="新闻播报">新闻播报</option>
+                        <option value="可爱">可爱</option>
+                        <option value="严肃">严肃</option>
+                        <option value="威严">威严</option>
+                        <option value="困惑">困惑</option>
+                        <option value="恐惧">恐惧</option>
+                        <option value="冷淡">冷淡</option>
+                    </select>
+                </div>
+                <div class="divider"></div>
+                <div class="control-group">
+                    <label><input type="checkbox" id="chk-add-timeline" checked> 添加到时间轴</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3>设置</h3>
+                <div class="setting-item">
+                    <label>MiniMax API 密钥：</label>
+                    <input type="password" id="setting-api-key" placeholder="输入 API 密钥">
+                </div>
+
+                <div class="setting-item">
+                    <label>Group ID（选填，声音克隆需要）：</label>
+                    <input type="text" id="setting-group-id" placeholder="留空则由密钥自动识别">
+                </div>
+
+                <div class="setting-item">
+                    <label>输出文件夹：</label>
+                    <div style="display:flex; gap:5px;">
+                        <input type="text" id="setting-output-path" readonly>
+                        <button id="btn-browse-output">...</button>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="btn-save-settings">保存</button>
+                    <button id="btn-close-settings">取消</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support Modal -->
+        <div id="support-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3>联系支持</h3>
+                <div class="setting-item">
+                    <label>QQ（点击「复制」可复制）：</label>
+                    <div style="display:flex; gap:5px; align-items:center;">
+                        <input type="text" id="support-qq" value="1940905115" readonly
+                            style="font-size:14px; font-weight:bold; color:#96CE01; flex:1; user-select:text;">
+                        <button id="btn-copy-qq" title="复制 QQ">复制</button>
+                    </div>
+                </div>
+                <div id="support-copy-status" style="font-size:12px; color:#6f6; min-height:16px; margin:4px 0;"></div>
+                <div class="modal-actions">
+                    <button id="btn-open-qq">打开 QQ</button>
+                    <button id="btn-close-support">关闭</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback Modal -->
+        <div id="feedback-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3 id="feedback-title">提供反馈</h3>
+                <div class="setting-item">
+                    <label>支持邮箱（点击「复制」可复制）：</label>
+                    <div style="display:flex; gap:5px; align-items:center;">
+                        <input type="text" id="feedback-email" value="1940905115@qq.com" readonly
+                            style="font-size:14px; font-weight:bold; color:#96CE01; flex:1; user-select:text;">
+                        <button id="btn-copy-email" title="复制邮箱">复制</button>
+                    </div>
+                </div>
+                <div id="feedback-copy-status" style="font-size:12px; color:#6f6; min-height:16px; margin:4px 0;"></div>
+                <div class="modal-actions">
+                    <button id="btn-send-email">发送邮件</button>
+                    <button id="btn-close-feedback">关闭</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voice Clone Modal -->
+        <div id="clone-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3>声音克隆</h3>
+                <div class="setting-item">
+                    <label>参考音频（mp3 / wav / m4a，10 秒~5 分钟，≤20MB）：</label>
+                    <div style="display:flex; gap:5px;">
+                        <input type="text" id="clone-file-path" readonly placeholder="选择音频文件...">
+                        <button id="btn-clone-browse">...</button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>音色显示名（允许中文，仅用于下拉列表显示）：</label>
+                    <input type="text" id="clone-display-name" placeholder="例如：我的声音 / Ted 的克隆">
+                </div>
+                <div class="setting-item">
+                    <label>音色 ID（自动生成且唯一，可手动修改；字母开头，8-256 位）：</label>
+                    <div style="display:flex; gap:5px;">
+                        <input type="text" id="clone-voice-id" placeholder="自动生成" style="flex:1;">
+                        <button id="btn-regen-id" title="重新生成">↻</button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>试听文本（选填，填写后会试听）：</label>
+                    <input type="text" id="clone-preview-text" placeholder="例如：你好，这是我的克隆音色。">
+                </div>
+                <div class="setting-item">
+                    <label>试听模型：</label>
+                    <select id="clone-model">
+                        <option value="speech-2.8-hd" selected>MiniMax Speech 2.8 HD</option>
+                        <option value="speech-2.8-turbo">MiniMax Speech 2.8 Turbo</option>
+                        <option value="speech-2.6-hd">MiniMax Speech 2.6 HD</option>
+                        <option value="speech-2.6-turbo">MiniMax Speech 2.6 Turbo</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>语言（决定发音方式）：</label>
+                    <select id="clone-lang">
+                        <option value="mandarin" selected>普通话</option>
+                        <option value="cantonese">粤语</option>
+                    </select>
+                    <div style="font-size: 10px; color: #888; margin-top: 4px;">
+                        * 选「粤语」后，合成时会自动给文本加粤拼标注，让克隆声音说粤语。
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label><input type="checkbox" id="clone-noise-reduction" checked> 降噪</label>
+                    <label style="margin-left:10px;"><input type="checkbox" id="clone-vol-norm" checked> 音量归一化</label>
+                </div>
+                <div id="clone-status" style="font-size:12px; color:#888; min-height:16px; margin:6px 0;"></div>
+                <div class="modal-actions">
+                    <button id="btn-do-clone">开始克隆</button>
+                    <button id="btn-close-clone">关闭</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audio Player -->
+        <div id="audio-player">
+            <button id="player-play-pause" title="播放/暂停">▶</button>
+            <span id="player-current">0:00</span>
+            <input type="range" id="player-progress" min="0" max="100" value="0" step="0.1">
+            <span id="player-duration">0:00</span>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="hidden">
+            <div class="spinner"></div>
+            <div id="loading-msg">生成中...</div>
+        </div>
+
+
+
+        <!-- Scripts -->
+        <script src="CSInterface.js"></script>
+        <script src="resolve_bridge.js"></script>
+        <script src="pitch_editor.js"></script>
+        <script src="jyutping-data.js"></script>
+        <script src="main.js"></script>
+</body>
+
+</html>

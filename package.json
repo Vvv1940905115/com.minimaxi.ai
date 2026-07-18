@@ -1,0 +1,19 @@
+{
+    "name": "aibow-voice-minimax",
+    "version": "2.5.0",
+    "description": "AiBowVoice MiniMax",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "dist": "electron-builder"
+    },
+    "keywords": [],
+    "author": "AiBow",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^33.0.0"
+    },
+    "dependencies": {
+        "aescripts-cep-license": "file:./aescripts-CEP-licensing-framework-main"
+    }
+}

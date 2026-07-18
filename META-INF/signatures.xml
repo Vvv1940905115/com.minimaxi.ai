@@ -1,0 +1,39 @@
+<signatures>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="PackageSignature">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+<Reference Type="http://www.w3.org/2000/09/xmldsig#Manifest" URI="#PackageContents">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<DigestValue>zS7JlwaMPhFXLtFXBs+lXOraESxHnI8wB6RCaN+12YM=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue Id="PackageSignatureValue">BtwXJOXd9FPTJ7KdAYZz8XavIJXoCsS5sg+WXkJ6Qt5AFyx64y/T5NVmLia/0qzv
+ylQM7dUebugstH0IbqaetRm6V9VyQ3LNVJMYNp5rBl/YXJl9QnPyB1tHtNThfrsY
+iShdNwxbOCebbJ0wvWKL6HXgHXZuqvvjKcHZKbkfINk=</SignatureValue>
+
+<KeyInfo>
+<X509Data>
+<X509Certificate>MIIB+zCCAWQCCQD8j1RQbJhKUzANBgkqhkiG9w0BAQsFADBCMQswCQYDVQQGEwJK
+UDEOMAwGA1UECAwFVG9reW8xDjAMBgNVBAoMBUFpQm93MRMwEQYDVQQDDApBaUJv
+d1ZvaWNlMB4XDTI2MDEzMDIzMTI0NVoXDTM3MDQxODIzMTI0NVowQjELMAkGA1UE
+BhMCSlAxDjAMBgNVBAgMBVRva3lvMQ4wDAYDVQQKDAVBaUJvdzETMBEGA1UEAwwK
+QWlCb3dWb2ljZTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA7I+RiElz/hiH
+P5lhjWDYC/pVaNOrvEcf8iIH8+40kx+/NfQAJyLbS7oPX/4wKmThiNH2TNZqCQFT
+055pXRlW5RU+BciTO2eMPrAjfHh9L3Y/frWIR7eEnoO+DpzNHbfDyrvKWS/p4PTv
+/8MbulcyI8nlL6S8AColqk0oabHmXw0CAwEAATANBgkqhkiG9w0BAQsFAAOBgQDi
+lWNnR2ybsXOjQA9wX5CyNVz7IYoR+NAb3EjLiCdbYWU6qAZYg5XVnuc4QuIpHHuz
+cX80RDK26cZ2g0x5Fs7EF809y7KAN9tWjzJX87p5kwBsQsr8MQ2vYqA3GvX/ESqm
+WMpZITbaxHdInrIgqoO/Hpe67eRtSh0cZ/OBvNNshw==
+</X509Certificate>
+</X509Data>
+</KeyInfo>
+<Object>
+<Manifest Id="PackageContents">
+<Reference URI="mimetype"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>b07Onu9cTlGK1WpvgtFOlfk+Tl0HscuNIt6GZtesPX8=</DigestValue></Reference><Reference URI="client/config_manager.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>T1Km3WaplxoDy/TaVTt3ayvjR54iEBADXS9UST8uLPE=</DigestValue></Reference><Reference URI="client/CSInterface.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>qMOg3CssYLKd8260tP/X+YGccDCcK2EF2porhIw0jng=</DigestValue></Reference><Reference URI="client/index.html"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>iIoAR6rezHTOR8CdOCs+41I8WgTCqdVWmSz+NT3bB8Y=</DigestValue></Reference><Reference URI="client/main.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>LJWyEo1sI0MVW8hftKuB0VjSUPKTirMZ0w5BPXMRoqA=</DigestValue></Reference><Reference URI="client/main_voice.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>QJPcVtkciHaJjJlFHtb9/GH/vvB5bCqZw53rWs24hJ0=</DigestValue></Reference><Reference URI="client/nav.css"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>fu9UXaVyUta9ESkDNBge88VuQyk1qo9Z2f+XjjEYjGI=</DigestValue></Reference><Reference URI="client/pitch_editor.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>SfKngG9/YUrJQXhn8RmeEZqB7MBOlasD7em9GEkcOyE=</DigestValue></Reference><Reference URI="client/resolve_bridge.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>sUiN7644JWOg7lKQq5ktLzwBVQWFkjMjjPh9BNCpTX8=</DigestValue></Reference><Reference URI="client/settings_manager.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>U/XUVylye/0idFd5rLJ2MPtP6KBSOPDTwyMjMWwANek=</DigestValue></Reference><Reference URI="client/src_backup/config_manager.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>nzs+AdRJU27wimdw5vmEl8BUNB51aK0n7blbhSeodpU=</DigestValue></Reference><Reference URI="client/src_backup/license_manager.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>uli2PJWBnNfcUiQK49mXV3dMjnjJTKx1X8VGCzJYd4w=</DigestValue></Reference><Reference URI="client/src_backup/main_voice.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>oFdALPmC4ibaIgC+ALfUn98siDSmWA3C2BTjK4Vmps0=</DigestValue></Reference><Reference URI="client/src_backup/settings_manager.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>ldpVE3L/B8cz6rW8qsnjJ/Ss6RVSK1aHDOQDbGGAHPk=</DigestValue></Reference><Reference URI="client/style.css"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>VA5K3RcZEzr6KCQtDGNihk0dEyHU5pT6Qalmkl1iQCE=</DigestValue></Reference><Reference URI="CSXS/manifest.xml"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>tUeZt8XroIdr3aHhWSMFnlm3QRDy31lCylfnB/8yp60=</DigestValue></Reference><Reference URI="host/index.jsx"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>bg2J+O4qbMMfO3GJs6H2xRsTlfI4qx7Cyh9YHdt6tck=</DigestValue></Reference><Reference URI="host/index_ppro.jsx"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>GSKiqN86rajz5Ty8KdhgtHgQ63t/ILS5Eh8XGmH44zY=</DigestValue></Reference><Reference URI="node_modules/aescripts-cep-license/.gitignore"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>zzw1PLuAdcCMpuDtlvoxtpolr2S/2uHyyK0MQIZc34E=</DigestValue></Reference><Reference URI="node_modules/aescripts-cep-license/aesp.es.d.ts"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>40sa5ECy+VpC8IYzUvUE3PJTabt5pvvoage//bo2CYk=</DigestValue></Reference><Reference URI="node_modules/aescripts-cep-license/aesp.es.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>CAs0I6Fq558FJdHURxLN/i0uar1qw3YvrCI2vQSz7mU=</DigestValue></Reference><Reference URI="node_modules/aescripts-cep-license/aesp.umd.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>eU7TCzDlW+/5xX4bB6NoSBI2ANcFpB6HJlwlO7MWo5s=</DigestValue></Reference><Reference URI="node_modules/aescripts-cep-license/img/prodimage-examples.png"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>Nni4xkt8iGB+81K6OrrPqm+1Q6yOftCFmCRAGNFSq7Q=</DigestValue></Reference><Reference URI="node_modules/aescripts-cep-license/package.json"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>mjhIe+gciBZ80kVapz52wR+ktlmrOjiMLdm3J11w++o=</DigestValue></Reference><Reference URI="package.json"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>Q6zU/pjXkaLgxjg/aojV+HPiFV2nYEciIo2uvqiD7I4=</DigestValue></Reference></Manifest>
+</Object>
+</Signature>
+</signatures>
